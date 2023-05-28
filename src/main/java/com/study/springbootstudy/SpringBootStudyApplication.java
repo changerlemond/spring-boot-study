@@ -18,23 +18,28 @@ public class SpringBootStudyApplication {
 
     public static void main(String[] args) {
         ServletWebServerFactory servletWebServerFactory = new TomcatServletWebServerFactory();
-        WebServer webServer = servletWebServerFactory.getWebServer(servletContext -> servletContext.addServlet("frontController", new HttpServlet() {
-            @Override
-            protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-                // 인증, 보안, 다국어, 공통 기능
-                if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
-                    String name = req.getParameter("name");
+        WebServer webServer = servletWebServerFactory.getWebServer(servletContext -> {
+            HelloController helloController = new HelloController();
+            servletContext.addServlet("frontController", new HttpServlet() {
+                @Override
+                protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+                    // 인증, 보안, 다국어, 공통 기능
+                    if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
+                        String name = req.getParameter("name");
 
-                    resp.setStatus(HttpStatus.OK.value());
-                    resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                    resp.getWriter().println("Hello " + name);
-                } else if (req.getRequestURI().equals("/user")) {
-                    //
-                } else {
-                    resp.setStatus(HttpStatus.NOT_FOUND.value());
+                        String ret = helloController.hello(name);
+
+                        resp.setStatus(HttpStatus.OK.value());
+                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+                        resp.getWriter().println(ret);
+                    } else if (req.getRequestURI().equals("/user")) {
+                        //
+                    } else {
+                        resp.setStatus(HttpStatus.NOT_FOUND.value());
+                    }
                 }
-            }
-        }).addMapping("/hello"));
+            }).addMapping("/hello");
+        });
         webServer.start();
     }
 
