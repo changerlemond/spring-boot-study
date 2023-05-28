@@ -1,5 +1,6 @@
 package com.study.springbootstudy;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,7 @@ public class SpringBootStudyApplication {
     }
 
     public static void main(String[] args) {
-        MySpringApplication.run(SpringBootStudyApplication.class, args);
+        SpringApplication.run(SpringBootStudyApplication.class, args);
     }
 
 }
