@@ -1,6 +1,7 @@
 package com.study.springbootstudy;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +10,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Component
-public @interface MyComponent {
+@Configuration
+@ComponentScan
+public @interface MySpringBootAnnotation {
 }
