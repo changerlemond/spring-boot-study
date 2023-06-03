@@ -1,3 +1,5 @@
+com.study.config.autoconfig.PropertyPostProcessorConfig
 com.study.config.autoconfig.TomcatWebServerConfig
 com.study.config.autoconfig.DispatcherServletConfig
 com.study.config.autoconfig.JettyWebServerConfig
+com.study.config.autoconfig.PropertyPlaceholderConfig
