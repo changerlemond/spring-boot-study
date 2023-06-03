@@ -15,7 +15,7 @@ public class HelloApiTest {
         TestRestTemplate testTemplate = new TestRestTemplate();
 
         ResponseEntity<String> response =
-                testTemplate.getForEntity("http://localhost:8080/hello?name={name}", String.class, "Spring");
+                testTemplate.getForEntity("http://localhost:8080/app/hello?name={name}", String.class, "Spring");
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE);
         assertThat(response.getBody()).isEqualTo("*Hello Spring*");
