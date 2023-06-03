@@ -1,26 +1,27 @@
 package com.study.config.autoconfig;
 
 import com.study.config.MyAutoConfiguration;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 
 @MyAutoConfiguration
-@Conditional(TomcatWebServerConfig.TomcatCondition.class)
-public class TomcatWebServerConfig {
+@Conditional(JettyWebServerConfig.JettyCondition.class)
+public class JettyWebServerConfig {
 
-    @Bean("tomcatServletWebServerFactory")
+    @Bean("jettyServletWebServerFactory")
     public ServletWebServerFactory servletWebServerFactory() {
-        return new TomcatServletWebServerFactory();
+        return new JettyServletWebServerFactory();
     }
 
-    static class TomcatCondition implements Condition {
+    static class JettyCondition implements Condition {
         @Override
-        public boolean matches(ConditionContext context, org.springframework.core.type.AnnotatedTypeMetadata metadata) {
-            return false;
+        public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+            return true;
         }
     }
 }
